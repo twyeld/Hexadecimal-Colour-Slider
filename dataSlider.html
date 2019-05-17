@@ -6,18 +6,34 @@
     </style>
     </head>
 <body>
+
+<div>
+  <input type="range" min="1" max="100" value="50" id="myRange">
+  <p>Value: <span id="demo"></span></p>
+</div>
     <script src="js/jquery.min.js"></script>
-<input type="range" style= "width: 400px;" id="slider" min="0" max="1023" step="1" value="0">
+<input type="range" style= "width: 400px;" id="slider" min="0" max="1535" step="1" value="0">
 	<output id="output"></output>
 		<script type="text/javascript">
+		
+		var slider = document.getElementById("myRange");
+		var output = document.getElementById("demo");
+		output.innerHTML = slider.value; // Display the default slider value
+
+		// Update the current slider value (each time you drag the slider handle)
+		slider.oninput = function() {
+		  output.innerHTML = this.value;
+		}
 
 		const hexStringUp = '0123456789ABCDEF';
 		const hexStringDn = 'FEDCBA9876543210';
-		const hexNull = '0';
+		const hexZeros = '0';
+		const hexEfs = 'F';
 
 		var hexArrayShortUp = Array.from(hexStringUp.repeat(16));
 		var hexArrayShortDn = Array.from(hexStringDn.repeat(16));
-		var hexArrayNull = Array.from(hexNull.repeat(256));
+		var hexArrayZeros = Array.from(hexZeros.repeat(256));
+		var hexArrayEfs = Array.from(hexEfs.repeat(256));
 		
 		let hexArrayLongUp = [];
 		
@@ -30,37 +46,43 @@
 		(hexArrayLongDn = hexArrayLongDn.concat(Array.from(letter.repeat(16)))));
 		
 		//////////red//////////
-		let hexArrayLongUpDnNullUp =
-			hexArrayLongUp.concat(hexArrayLongDn, hexArrayNull, hexArrayLongUp);
-		let hexArrayShortUpDnNullUp =
-			hexArrayShortUp.concat(hexArrayShortDn, hexArrayNull, hexArrayShortUp);
+		let hexArrayLongEfsEfsDnZerosZerosUp =
+			hexArrayEfs.concat
+				(hexArrayEfs, hexArrayLongDn, hexArrayZeros, hexArrayZeros, hexArrayLongUp);
+		let hexArrayShortEfsEfsDnZerosZerosUp =
+			hexArrayEfs.concat
+				(hexArrayEfs, hexArrayShortDn, hexArrayZeros, hexArrayZeros, hexArrayShortUp);
 		
 		//////////green///////////
-		let hexArrayLongNullUpDnNull =
-			hexArrayNull.concat(hexArrayLongUp, hexArrayLongDn, hexArrayNull);
-		let hexArrayShortNullUpDnNull =
-			hexArrayNull.concat(hexArrayShortUp, hexArrayShortDn, hexArrayNull);
+		let hexArrayLongZerosUpEfsEfsDnZeros =
+			hexArrayZeros.concat
+				(hexArrayLongUp, hexArrayEfs, hexArrayEfs, hexArrayLongDn, hexArrayZeros);
+		let hexArrayShortZerosUpEfsEfsDnZeros =
+			hexArrayZeros.concat
+				(hexArrayShortUp, hexArrayEfs, hexArrayEfs, hexArrayShortDn, hexArrayZeros);
 			
 		/////////blue////////////////
-		let hexArrayLongNullNullUpDn =
-			hexArrayNull.concat(hexArrayNull, hexArrayLongUp, hexArrayLongDn);
-		let hexArrayShortNullNullUpDn =
-			hexArrayNull.concat(hexArrayNull, hexArrayShortUp, hexArrayShortDn);
+		let hexArrayLongDnZerosZerosUpEfsEfs =
+			hexArrayLongDn.concat
+				(hexArrayZeros, hexArrayZeros, hexArrayLongUp, hexArrayEfs, hexArrayEfs);
+		let hexArrayShortDnZerosZerosUpEfsEfs =
+			hexArrayShortDn.concat
+				(hexArrayZeros, hexArrayZeros, hexArrayShortUp, hexArrayEfs, hexArrayEfs);
 		
 		$('#slider').on('change input', function getHexColours() {
-			var hexStringLongRed = hexArrayLongUpDnNullUp[this.value];
-			var hexStringShortRed = hexArrayShortUpDnNullUp[this.value];
+			var hexStringLongRed = hexArrayLongEfsEfsDnZerosZerosUp[this.value];
+			var hexStringShortRed = hexArrayShortEfsEfsDnZerosZerosUp[this.value];
 			
-			var hexStringLongGreen = hexArrayLongNullUpDnNull[this.value];
-			var hexStringShortGreen = hexArrayShortNullUpDnNull[this.value];
+			var hexStringLongGreen = hexArrayLongZerosUpEfsEfsDnZeros[this.value];
+			var hexStringShortGreen = hexArrayShortZerosUpEfsEfsDnZeros[this.value];
 			
-			var hexStringLongBlue = hexArrayLongNullNullUpDn[this.value];
-			var hexStringShortBlue = hexArrayShortNullNullUpDn[this.value];
+			var hexStringLongBlue = hexArrayLongDnZerosZerosUpEfsEfs[this.value];
+			var hexStringShortBlue = hexArrayShortDnZerosZerosUpEfsEfs[this.value];
 			
 		$("#output").text("#" +
 			hexStringLongRed + hexStringShortRed +
 			hexStringLongGreen + hexStringShortGreen +
-			hexStringLongBlue + hexStringShortBlue);
+			hexStringLongBlue + hexStringShortBlue );
 		
 		document.body.style.background =
 			"#" +
@@ -74,8 +96,6 @@
 		document.writeln(hexArrayShortUp)
 		document.writeln(hexArrayLongDn)
 		document.writeln(hexArrayShortDn)
-		document.writeln(hexArrayLongUpDnNullUp)
-		document.writeln(hexArrayShortUpDnNullUp)
 
     </script>
 	

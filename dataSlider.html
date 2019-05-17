@@ -8,7 +8,9 @@
 <body>
     <script src="js/jquery.min.js"></script>
 <input type="range" style= "width: 400px;" id="slider" min="0" max="15" step="1" value="0">
+<input type="range" style= "width: 400px;" id="slider2" min="0" max="255" step="1" value="0">
 	<output id="output"></output>
+	<output id="output2"></output>
 	<div id="NEXT"></div>
 	<div id="hexi"></div>
 	<div id="hexLoop"></div>
@@ -18,84 +20,34 @@
 		$('#slider').on('change input', function getHexColours() {
 			var HEX = hex[this.value];
 		$("#output").text("#" + HEX + HEX + "9999");
-		document.getElementById("hexi").innerHTML = "#" + HEX + HEX + "9999";
-		document.body.style.background = "#" + HEX + HEX + "9999";
-		}).change();
-		
-		var Current = 0;
-		document.getElementById("NEXT").innerHTML = hex[Current];
-		
-		$('#slider').on('change input', function Next() {
-		if (Current == hex.length - 1){
-        Current = 0}
-		else {
-			Current++;}
-		document.getElementById("NEXT").innerHTML = hex[Current];
+		//document.body.style.background = "#" + HEX + HEX + "9999";
 		}).change();
 
-		//var count = 5;
-		function loopFunction(){
-		var hex1 = "";
-		var hex2 = "";
-		var i;
-		for (var i = 0; i < hex.length; i++) {//count; i++) {
-			//doSomething();
-			hex1 += hex[0];
-			hex2 += hex[1];
-		}
-			document.getElementById("hexLoop").innerHTML = hex1 + hex2;
-		}
-		
-		loopFunction();
-		//////////////////////////////////////
-		function doSomething() {
-			document.writeln (hex[15]);//("hello!");
-		}
-		
 		///////////////////////////////////
 		const alphabet = '0123456789ABCDEF';
 
-		const hexx = Array.from(alphabet.repeat(16));
+		var hexx = Array.from(alphabet.repeat(16));
 		
-		document.writeln(hexx)
-		
-		/////////////////////////////
-
-		const valueList = Array.from(alphabet);
-
-		const hexxx = new Array(16).fill(valueList);
-		
-		document.writeln(hexxx)
-		
-		////////////////////////////
-
 		let hexxxx = [];
-
+		
 		Array.from(alphabet).forEach(letter =>
 		(hexxxx = hexxxx.concat(Array.from(letter.repeat(16)))));
 		
+		$('#slider2').on('change input', function getHexColours2() {
+			var HEX2 = hexx[this.value];
+			var HEX3 = hexxxx[this.value];
+		$("#output2").text("#" + HEX3 + HEX2 + "9999");
+		document.body.style.background = "#" + HEX3 + HEX2 + "9999";
+		}).change();
+		
+		document.writeln(hexx)
+		
+		////////////////////////////////////
+
+
+		
 		document.writeln(hexxxx)
 		
-		////////////////////////////////
-		const multiples = x => f => {
-		
-		if (x > 0) {
-			f() //empty value
-			multiples (x - 1) (f)
-		  }
-		}
-
-
-		multiples (16) (() => document.writeln (hex[0]))
-		multiples (16) (() => document.writeln (hex[1]))
-		multiples (16) (() => document.writeln (hex[2]))
-		multiples (16) (() => document.writeln (hex[15]))
-
-
-		
-		
-		
-
     </script>
 	
 

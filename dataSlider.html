@@ -7,47 +7,29 @@
     </head>
 <body>
     <script src="js/jquery.min.js"></script>
-<input type="range" style= "width: 400px;" id="slider" min="0" max="15" step="1" value="0">
-<input type="range" style= "width: 400px;" id="slider2" min="0" max="255" step="1" value="0">
+<input type="range" style= "width: 400px;" id="slider" min="0" max="255" step="1" value="0">
 	<output id="output"></output>
-	<output id="output2"></output>
-	<div id="NEXT"></div>
-	<div id="hexi"></div>
-	<div id="hexLoop"></div>
 		<script type="text/javascript">
-			var hex =
-			["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"];
-		$('#slider').on('change input', function getHexColours() {
-			var HEX = hex[this.value];
-		$("#output").text("#" + HEX + HEX + "9999");
-		//document.body.style.background = "#" + HEX + HEX + "9999";
-		}).change();
 
-		///////////////////////////////////
-		const alphabet = '0123456789ABCDEF';
+		const hexString = '0123456789ABCDEF';
 
-		var hexx = Array.from(alphabet.repeat(16));
+		var hexArrayShort = Array.from(hexString.repeat(16));
 		
-		let hexxxx = [];
+		let hexArrayLong = [];
 		
-		Array.from(alphabet).forEach(letter =>
-		(hexxxx = hexxxx.concat(Array.from(letter.repeat(16)))));
+		Array.from(hexString).forEach(letter =>
+		(hexArrayLong = hexArrayLong.concat(Array.from(letter.repeat(16)))));
 		
-		$('#slider2').on('change input', function getHexColours2() {
-			var HEX2 = hexx[this.value];
-			var HEX3 = hexxxx[this.value];
-		$("#output2").text("#" + HEX3 + HEX2 + "9999");
-		document.body.style.background = "#" + HEX3 + HEX2 + "9999";
+		$('#slider').on('change input', function getHexColours2() {
+			var hexStringLong = hexArrayLong[this.value];
+			var hexStringShort = hexArrayShort[this.value];
+		$("#output").text("#" + hexStringLong + hexStringShort + "9999");
+		document.body.style.background = "#" + hexStringLong + hexStringShort + "9999";
 		}).change();
 		
-		document.writeln(hexx)
-		
-		////////////////////////////////////
+		document.writeln(hexArrayLong)
+		document.writeln(hexArrayShort)
 
-
-		
-		document.writeln(hexxxx)
-		
     </script>
 	
 

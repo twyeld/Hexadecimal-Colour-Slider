@@ -5,26 +5,16 @@
         body { background-color: lightblue}
     </style>
     </head>
-<body>
+<body onLoad = "Slider()">
 
 <div>
-  <input type="range" min="1" max="100" value="50" id="myRange">
-  <p>Value: <span id="demo"></span></p>
+  <input type="range" style= "width: 400px;" id="slider" min="0" max="1535" step="1" id="app" value="0">
+  <p>Value: <span id="app"></span></p>
 </div>
-    <script src="js/jquery.min.js"></script>
-<input type="range" style= "width: 400px;" id="slider" min="0" max="1535" step="1" value="0">
-	<output id="output"></output>
+
 		<script type="text/javascript">
 		
-		var slider = document.getElementById("myRange");
-		var output = document.getElementById("demo");
-		output.innerHTML = slider.value; // Display the default slider value
-
-		// Update the current slider value (each time you drag the slider handle)
-		slider.oninput = function() {
-		  output.innerHTML = this.value;
-		}
-
+		
 		const hexStringUp = '0123456789ABCDEF';
 		const hexStringDn = 'FEDCBA9876543210';
 		const hexZeros = '0';
@@ -67,9 +57,15 @@
 				(hexArrayZeros, hexArrayZeros, hexArrayLongUp, hexArrayEfs, hexArrayEfs);
 		let hexArrayShortDnZerosZerosUpEfsEfs =
 			hexArrayShortDn.concat
-				(hexArrayZeros, hexArrayZeros, hexArrayShortUp, hexArrayEfs, hexArrayEfs);
+				(hexArrayZeros, hexArrayZeros, hexArrayShortUp, hexArrayEfs, hexArrayEfs);	
 		
-		$('#slider').on('change input', function getHexColours() {
+		////////// simple slider no jquery //////////////
+		var slider = document.getElementById("slider");
+		var output = document.getElementById("app");
+		output.innerHTML = document.getElementById("slider").value;
+		
+		slider.oninput = function Slider() {
+		
 			var hexStringLongRed = hexArrayLongEfsEfsDnZerosZerosUp[this.value];
 			var hexStringShortRed = hexArrayShortEfsEfsDnZerosZerosUp[this.value];
 			
@@ -79,23 +75,20 @@
 			var hexStringLongBlue = hexArrayLongDnZerosZerosUpEfsEfs[this.value];
 			var hexStringShortBlue = hexArrayShortDnZerosZerosUpEfsEfs[this.value];
 			
-		$("#output").text("#" +
-			hexStringLongRed + hexStringShortRed +
-			hexStringLongGreen + hexStringShortGreen +
-			hexStringLongBlue + hexStringShortBlue );
-		
-		document.body.style.background =
-			"#" +
+		document.body.style.background = "#" +
 			hexStringLongRed + hexStringShortRed +
 			hexStringLongGreen + hexStringShortGreen +
 			hexStringLongBlue + hexStringShortBlue;
 			
-		}).change();
+		  output.innerHTML = "#" +
+			hexStringLongRed + hexStringShortRed +
+			hexStringLongGreen + hexStringShortGreen +
+			hexStringLongBlue + hexStringShortBlue;
+		}
 		
-		document.writeln(hexArrayLongUp)
-		document.writeln(hexArrayShortUp)
-		document.writeln(hexArrayLongDn)
-		document.writeln(hexArrayShortDn)
+		window.onload = Slider;
+		
+
 
     </script>
 	

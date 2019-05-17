@@ -1,79 +1,83 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <style>
-        body { background-color: lightblue}
+      body {
+        background-color: lightblue;
+      }
     </style>
-    </head>
+  </head>
+  <body>
+    <div>
+      <input
+        type="range"
+        style="width: 400px;"
+        id="slider"
+        min="0"
+        max="1535"
+        step="1"
+        id="app"
+        value="0"
+      />
+      <p>Value: <span id="app"></span></p>
+    </div>
 
-<div>
-  <input type="range" style= "width: 400px;" id="slider" min="0" max="1535" step="1" id="app" value="0">
-  <p>Value: <span id="app"></span></p>
-</div>
+    <script type="text/javascript">
+      const StrUp = '0123456789ABCDEF';
+      const StrDn = 'FEDCBA9876543210';
+      const Zeros = '0';
+      const Efs = 'F';
 
-		<script type="text/javascript">
-		
-		
-		const StrUp = '0123456789ABCDEF';
-		const StrDn = 'FEDCBA9876543210';
-		const Zeros = '0';
-		const Efs = 'F';
+      var ArrSUp = Array.from(StrUp.repeat(16));
+      var ArrSDn = Array.from(StrDn.repeat(16));
+      var ArrZeros = Array.from(Zeros.repeat(256));
+      var ArrEfs = Array.from(Efs.repeat(256));
 
-		var ArrSUp = Array.from(StrUp.repeat(16));
-		var ArrSDn = Array.from(StrDn.repeat(16));
-		var ArrZeros = Array.from(Zeros.repeat(256));
-		var ArrEfs = Array.from(Efs.repeat(256));
-		
-		let ArrLUp = [];
-		
-		Array.from(StrUp).forEach(letter =>
-		(ArrLUp = ArrLUp.concat(Array.from(letter.repeat(16)))));
-		
-		let ArrLDn = [];
-		
-		Array.from(StrDn).forEach(letter =>
-		(ArrLDn = ArrLDn.concat(Array.from(letter.repeat(16)))));
-		
-		//////////red//////////
-		let ArrLR = ArrEfs.concat(ArrEfs, ArrLDn, ArrZeros, ArrZeros, ArrLUp);
-		let ArrSR =	ArrEfs.concat(ArrEfs, ArrSDn, ArrZeros, ArrZeros, ArrSUp);
-		
-		//////////green///////////
-		let ArrLG =	ArrZeros.concat(ArrLUp, ArrEfs, ArrEfs, ArrLDn, ArrZeros);
-		let ArrSG = ArrZeros.concat(ArrSUp, ArrEfs, ArrEfs, ArrSDn, ArrZeros);
-			
-		/////////blue////////////////
-		let ArrLB =	ArrLDn.concat(ArrZeros, ArrZeros, ArrLUp, ArrEfs, ArrEfs);
-		let ArrSB =	ArrSDn.concat(ArrZeros, ArrZeros, ArrSUp, ArrEfs, ArrEfs);	
-		
-		////////// simple slider no jquery //////////////
-		var slider = document.getElementById("slider");
-		var output = document.getElementById("app");
-		output.innerHTML = document.getElementById("slider").value;
-		
-		function Slider() {
-		
-			var LR = ArrLR[this.value];
-			var SR = ArrSR[this.value];
-			
-			var LG = ArrLG[this.value];
-			var SG = ArrSG[this.value];
-			
-			var LB = ArrLB[this.value];
-			var SB = ArrSB[this.value];
-			
-		document.body.style.background = "#" + LR + SR + LG + SG + LB + SB;
-			
-		  output.innerHTML = "#" + LR + SR + LG + SG + LB + SB;
-		}
-		
-		slider.oninput = Slider;
-		window.onload = Slider;
-		
+      let ArrLUp = [];
 
+      Array.from(StrUp).forEach(letter =>
+	  (ArrLUp = ArrLUp.concat(Array.from(letter.repeat(16)))));
 
+      let ArrLDn = [];
+
+      Array.from(StrDn).forEach(letter =>
+	  (ArrLDn = ArrLDn.concat(Array.from(letter.repeat(16)))));
+
+      //////////red//////////
+      let ArrLR = ArrEfs.concat(ArrEfs, ArrLDn, ArrZeros, ArrZeros, ArrLUp);
+      let ArrSR = ArrEfs.concat(ArrEfs, ArrSDn, ArrZeros, ArrZeros, ArrSUp);
+
+      //////////green///////////
+      let ArrLG = ArrZeros.concat(ArrLUp, ArrEfs, ArrEfs, ArrLDn, ArrZeros);
+      let ArrSG = ArrZeros.concat(ArrSUp, ArrEfs, ArrEfs, ArrSDn, ArrZeros);
+
+      /////////blue////////////////
+      let ArrLB = ArrLDn.concat(ArrZeros, ArrZeros, ArrLUp, ArrEfs, ArrEfs);
+      let ArrSB = ArrSDn.concat(ArrZeros, ArrZeros, ArrSUp, ArrEfs, ArrEfs);
+
+      ////////// simple slider no jquery //////////////
+      var slider = document.getElementById('slider');
+      var output = document.getElementById('app');
+      output.innerHTML = document.getElementById('slider').value;
+
+      function Slider() {
+        var LR = ArrLR[document.getElementById('slider').value];
+        var SR = ArrSR[document.getElementById('slider').value];
+
+        var LG = ArrLG[document.getElementById('slider').value];
+        var SG = ArrSG[document.getElementById('slider').value];
+
+        var LB = ArrLB[document.getElementById('slider').value];
+        var SB = ArrSB[document.getElementById('slider').value];
+
+        document.body.style.background = '#' + LR + SR + LG + SG + LB + SB;
+
+        output.innerHTML = '#' + LR + SR + LG + SG + LB + SB;
+      }
+
+      slider.oninput = Slider;
+
+      window.onload = Slider;
     </script>
-	
-
-</body>
+  </body>
 </html>

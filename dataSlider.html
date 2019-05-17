@@ -6,25 +6,60 @@
     </style>
     </head>
 <body>
-
-<div id="slider_count"><span id="sliderPrice">0</span></div>
-
-    <input type="range" id="range-slider" value="0.0" min="0" max="5" step="0" />
-	
     <script src="js/jquery.min.js"></script>
-
+<input type="range" id="slider" min="0" max="15" step="1" value="0">
+	<output id="output"></output>
 		<script type="text/javascript">
-var sizeRange = ["0","1","2","A","B","C"]
-
-$('#sliderPrice').html( sizeRange[0] );
-
-$(document).on('input change', '#range-slider', function() { 
-   var v=$(this).val();
-
-   //$('#sliderStatus').html( $(this).val() );
-   $('#sliderPrice').html( sizeRange[v] );
-
-});
+			var hex1 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"];
+			var hex2 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"];
+			var Current = 0;
+		$('#slider').on('change input', function() {
+			var HEX1 = hex1[this.value];
+			        if(Current == 0){
+            Current = hex1.length - 15;}
+        else{
+            Current++;}
+		$("#output").text(HEX1 + Current);
+		}).change();
     </script>
+	
+	<script type="text/javascript"> 
+
+    var text = [
+        "first item",
+        "second item",
+        "third item"
+    ]; 
+
+    var Current = 0;
+
+    document.getElementById("textHere").innerHTML = text[Current];
+
+    function Prev(){
+        if(Current == 0){
+            Current = text.length - 1;}
+        else{
+            Current--;}
+
+        document.getElementById("textHere").innerHTML = text[Current];
+    }
+
+    function Next(){
+        if(Current == text.length - 1){
+            Current = 0}
+        else{
+            Current++;}
+
+        document.getElementById("textHere").innerHTML = text[Current];
+    }
+
+</script>
+
+<div id="textHere"></div>
+
+<div>
+    <button onclick="Next();">Next!</button>
+    <button onclick="Prev();">Previous</button>
+</div>
 </body>
 </html>

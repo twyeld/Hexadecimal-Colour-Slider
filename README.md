@@ -1,2 +1,2 @@
-# Hexidecimal-Colour-Slider
+# Hexadecimal-Colour-Slider
 Basic dataslider to demonstrate mixed character arrays, extended arrays and repeated array elements etc...

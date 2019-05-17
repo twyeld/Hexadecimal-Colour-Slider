@@ -5,7 +5,6 @@
         body { background-color: lightblue}
     </style>
     </head>
-<body onLoad = "Slider()">
 
 <div>
   <input type="range" style= "width: 400px;" id="slider" min="0" max="1535" step="1" id="app" value="0">
@@ -15,77 +14,60 @@
 		<script type="text/javascript">
 		
 		
-		const hexStringUp = '0123456789ABCDEF';
-		const hexStringDn = 'FEDCBA9876543210';
-		const hexZeros = '0';
-		const hexEfs = 'F';
+		const StrUp = '0123456789ABCDEF';
+		const StrDn = 'FEDCBA9876543210';
+		const Zeros = '0';
+		const Efs = 'F';
 
-		var hexArrayShortUp = Array.from(hexStringUp.repeat(16));
-		var hexArrayShortDn = Array.from(hexStringDn.repeat(16));
-		var hexArrayZeros = Array.from(hexZeros.repeat(256));
-		var hexArrayEfs = Array.from(hexEfs.repeat(256));
+		var ArrSUp = Array.from(StrUp.repeat(16));
+		var ArrSDn = Array.from(StrDn.repeat(16));
+		var ArrZeros = Array.from(Zeros.repeat(256));
+		var ArrEfs = Array.from(Efs.repeat(256));
 		
-		let hexArrayLongUp = [];
+		let ArrLUp = [];
 		
-		Array.from(hexStringUp).forEach(letter =>
-		(hexArrayLongUp = hexArrayLongUp.concat(Array.from(letter.repeat(16)))));
+		Array.from(StrUp).forEach(letter =>
+		(ArrLUp = ArrLUp.concat(Array.from(letter.repeat(16)))));
 		
-		let hexArrayLongDn = [];
+		let ArrLDn = [];
 		
-		Array.from(hexStringDn).forEach(letter =>
-		(hexArrayLongDn = hexArrayLongDn.concat(Array.from(letter.repeat(16)))));
+		Array.from(StrDn).forEach(letter =>
+		(ArrLDn = ArrLDn.concat(Array.from(letter.repeat(16)))));
 		
 		//////////red//////////
-		let hexArrayLongEfsEfsDnZerosZerosUp =
-			hexArrayEfs.concat
-				(hexArrayEfs, hexArrayLongDn, hexArrayZeros, hexArrayZeros, hexArrayLongUp);
-		let hexArrayShortEfsEfsDnZerosZerosUp =
-			hexArrayEfs.concat
-				(hexArrayEfs, hexArrayShortDn, hexArrayZeros, hexArrayZeros, hexArrayShortUp);
+		let ArrLR = ArrEfs.concat(ArrEfs, ArrLDn, ArrZeros, ArrZeros, ArrLUp);
+		let ArrSR =	ArrEfs.concat(ArrEfs, ArrSDn, ArrZeros, ArrZeros, ArrSUp);
 		
 		//////////green///////////
-		let hexArrayLongZerosUpEfsEfsDnZeros =
-			hexArrayZeros.concat
-				(hexArrayLongUp, hexArrayEfs, hexArrayEfs, hexArrayLongDn, hexArrayZeros);
-		let hexArrayShortZerosUpEfsEfsDnZeros =
-			hexArrayZeros.concat
-				(hexArrayShortUp, hexArrayEfs, hexArrayEfs, hexArrayShortDn, hexArrayZeros);
+		let ArrLG =	ArrZeros.concat(ArrLUp, ArrEfs, ArrEfs, ArrLDn, ArrZeros);
+		let ArrSG = ArrZeros.concat(ArrSUp, ArrEfs, ArrEfs, ArrSDn, ArrZeros);
 			
 		/////////blue////////////////
-		let hexArrayLongDnZerosZerosUpEfsEfs =
-			hexArrayLongDn.concat
-				(hexArrayZeros, hexArrayZeros, hexArrayLongUp, hexArrayEfs, hexArrayEfs);
-		let hexArrayShortDnZerosZerosUpEfsEfs =
-			hexArrayShortDn.concat
-				(hexArrayZeros, hexArrayZeros, hexArrayShortUp, hexArrayEfs, hexArrayEfs);	
+		let ArrLB =	ArrLDn.concat(ArrZeros, ArrZeros, ArrLUp, ArrEfs, ArrEfs);
+		let ArrSB =	ArrSDn.concat(ArrZeros, ArrZeros, ArrSUp, ArrEfs, ArrEfs);	
 		
 		////////// simple slider no jquery //////////////
 		var slider = document.getElementById("slider");
 		var output = document.getElementById("app");
 		output.innerHTML = document.getElementById("slider").value;
 		
-		slider.oninput = function Slider() {
+		function Slider() {
 		
-			var hexStringLongRed = hexArrayLongEfsEfsDnZerosZerosUp[this.value];
-			var hexStringShortRed = hexArrayShortEfsEfsDnZerosZerosUp[this.value];
+			var LR = ArrLR[this.value];
+			var SR = ArrSR[this.value];
 			
-			var hexStringLongGreen = hexArrayLongZerosUpEfsEfsDnZeros[this.value];
-			var hexStringShortGreen = hexArrayShortZerosUpEfsEfsDnZeros[this.value];
+			var LG = ArrLG[this.value];
+			var SG = ArrSG[this.value];
 			
-			var hexStringLongBlue = hexArrayLongDnZerosZerosUpEfsEfs[this.value];
-			var hexStringShortBlue = hexArrayShortDnZerosZerosUpEfsEfs[this.value];
+			var LB = ArrLB[this.value];
+			var SB = ArrSB[this.value];
 			
-		document.body.style.background = "#" +
-			hexStringLongRed + hexStringShortRed +
-			hexStringLongGreen + hexStringShortGreen +
-			hexStringLongBlue + hexStringShortBlue;
+		document.body.style.background = "#" + LR + SR + LG + SG + LB + SB;
 			
-		  output.innerHTML = "#" +
-			hexStringLongRed + hexStringShortRed +
-			hexStringLongGreen + hexStringShortGreen +
-			hexStringLongBlue + hexStringShortBlue;
+		  output.innerHTML = "#" + LR + SR + LG + SG + LB + SB;
 		}
 		
+		slider.oninput = Slider;
 		window.onload = Slider;
 		
 

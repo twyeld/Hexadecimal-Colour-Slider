@@ -7,53 +7,75 @@
     </head>
 <body>
     <script src="js/jquery.min.js"></script>
-<input type="range" style= "width: 400px;" id="slider" min="0" max="255" step="1" value="0">
+<input type="range" style= "width: 400px;" id="slider" min="0" max="1023" step="1" value="0">
 	<output id="output"></output>
-<input type="range" style= "width: 400px;" id="slider2" min="0" max="1023" step="1" value="0">
-	<output id="output2"></output>
 		<script type="text/javascript">
 
-		const hexStringForward = '0123456789ABCDEF';
-		const hexStringBackward = 'FEDCBA9876543210';
+		const hexStringUp = '0123456789ABCDEF';
+		const hexStringDn = 'FEDCBA9876543210';
 		const hexNull = '0';
 
-		var hexArrayShortForward = Array.from(hexStringForward.repeat(16));
-		var hexArrayShortBackward = Array.from(hexStringBackward.repeat(16));
+		var hexArrayShortUp = Array.from(hexStringUp.repeat(16));
+		var hexArrayShortDn = Array.from(hexStringDn.repeat(16));
 		var hexArrayNull = Array.from(hexNull.repeat(256));
 		
-		let hexArrayLongForward = [];
+		let hexArrayLongUp = [];
 		
-		Array.from(hexStringForward).forEach(letter =>
-		(hexArrayLongForward = hexArrayLongForward.concat(Array.from(letter.repeat(16)))));
+		Array.from(hexStringUp).forEach(letter =>
+		(hexArrayLongUp = hexArrayLongUp.concat(Array.from(letter.repeat(16)))));
 		
-		let hexArrayLongBackward = [];
+		let hexArrayLongDn = [];
 		
-		Array.from(hexStringBackward).forEach(letter =>
-		(hexArrayLongBackward = hexArrayLongBackward.concat(Array.from(letter.repeat(16)))));
+		Array.from(hexStringDn).forEach(letter =>
+		(hexArrayLongDn = hexArrayLongDn.concat(Array.from(letter.repeat(16)))));
 		
-		let hexArrayConcatLong = hexArrayLongForward.concat(hexArrayLongBackward, hexArrayNull, hexArrayLongForward);
-		let hexArrayConcatShort = hexArrayShortForward.concat(hexArrayShortBackward, hexArrayNull, hexArrayShortForward);
+		//////////red//////////
+		let hexArrayLongUpDnNullUp =
+			hexArrayLongUp.concat(hexArrayLongDn, hexArrayNull, hexArrayLongUp);
+		let hexArrayShortUpDnNullUp =
+			hexArrayShortUp.concat(hexArrayShortDn, hexArrayNull, hexArrayShortUp);
+		
+		//////////green///////////
+		let hexArrayLongNullUpDnNull =
+			hexArrayNull.concat(hexArrayLongUp, hexArrayLongDn, hexArrayNull);
+		let hexArrayShortNullUpDnNull =
+			hexArrayNull.concat(hexArrayShortUp, hexArrayShortDn, hexArrayNull);
+			
+		/////////blue////////////////
+		let hexArrayLongNullNullUpDn =
+			hexArrayNull.concat(hexArrayNull, hexArrayLongUp, hexArrayLongDn);
+		let hexArrayShortNullNullUpDn =
+			hexArrayNull.concat(hexArrayNull, hexArrayShortUp, hexArrayShortDn);
 		
 		$('#slider').on('change input', function getHexColours() {
-			var hexStringLongForward = hexArrayLongForward[this.value];
-			var hexStringShortForward = hexArrayShortForward[this.value];
-		$("#output").text("#" + hexStringLongForward + hexStringShortForward + "9999");
-		document.body.style.background = "#" + hexStringLongForward + hexStringShortForward + "9999";
+			var hexStringLongRed = hexArrayLongUpDnNullUp[this.value];
+			var hexStringShortRed = hexArrayShortUpDnNullUp[this.value];
+			
+			var hexStringLongGreen = hexArrayLongNullUpDnNull[this.value];
+			var hexStringShortGreen = hexArrayShortNullUpDnNull[this.value];
+			
+			var hexStringLongBlue = hexArrayLongNullNullUpDn[this.value];
+			var hexStringShortBlue = hexArrayShortNullNullUpDn[this.value];
+			
+		$("#output").text("#" +
+			hexStringLongRed + hexStringShortRed +
+			hexStringLongGreen + hexStringShortGreen +
+			hexStringLongBlue + hexStringShortBlue);
+		
+		document.body.style.background =
+			"#" +
+			hexStringLongRed + hexStringShortRed +
+			hexStringLongGreen + hexStringShortGreen +
+			hexStringLongBlue + hexStringShortBlue;
+			
 		}).change();
 		
-		$('#slider2').on('change input', function getHexColours2() {
-			var hexStringLongForward = hexArrayConcatLong[this.value];
-			var hexStringShortForward = hexArrayConcatShort[this.value];
-		$("#output2").text("#" + hexStringLongForward + hexStringShortForward + "9999");
-		document.body.style.background = "#" + hexStringLongForward + hexStringShortForward + "9999";
-		}).change();
-		
-		document.writeln(hexArrayLongForward)
-		document.writeln(hexArrayShortForward)
-		document.writeln(hexArrayLongBackward)
-		document.writeln(hexArrayShortBackward)
-		document.writeln(hexArrayConcatLong)
-		document.writeln(hexArrayConcatShort)
+		document.writeln(hexArrayLongUp)
+		document.writeln(hexArrayShortUp)
+		document.writeln(hexArrayLongDn)
+		document.writeln(hexArrayShortDn)
+		document.writeln(hexArrayLongUpDnNullUp)
+		document.writeln(hexArrayShortUpDnNullUp)
 
     </script>
 	

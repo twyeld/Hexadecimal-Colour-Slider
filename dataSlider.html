@@ -11,55 +11,31 @@
 	<output id="output"></output>
 		<script type="text/javascript">
 			var hex1 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"];
-			var hex2 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"];
-			var Current = 0;
 		$('#slider').on('change input', function() {
 			var HEX1 = hex1[this.value];
-			        if(Current == 0){
-            Current = hex1.length - 15;}
-        else{
-            Current++;}
-		$("#output").text(HEX1 + Current);
+		$("#output").text(HEX1);
 		}).change();
     </script>
 	
-	<script type="text/javascript"> 
+	<script type='text/javascript'>
+function getNextMember(array, startIndex) {
+   startIndex = startIndex || 0;
+   return function() {
+      startIndex++;  
+      return array[startIndex];
+   };
+};
+var word = [
+   'is',
+   'am',
+   'a'
+];
+var getNextWord = getNextMember(hex1);
+document.writeln(getNextWord );
+document.writeln('<br/>');
 
-    var text = [
-        "first item",
-        "second item",
-        "third item"
-    ]; 
-
-    var Current = 0;
-
-    document.getElementById("textHere").innerHTML = text[Current];
-
-    function Prev(){
-        if(Current == 0){
-            Current = text.length - 1;}
-        else{
-            Current--;}
-
-        document.getElementById("textHere").innerHTML = text[Current];
-    }
-
-    function Next(){
-        if(Current == text.length - 1){
-            Current = 0}
-        else{
-            Current++;}
-
-        document.getElementById("textHere").innerHTML = text[Current];
-    }
+document.writeln(getNextWord() + ' ' + getNextWord());
 
 </script>
-
-<div id="textHere"></div>
-
-<div>
-    <button onclick="Next();">Next!</button>
-    <button onclick="Prev();">Previous</button>
-</div>
 </body>
 </html>

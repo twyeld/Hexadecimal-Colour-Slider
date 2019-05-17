@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        
+    </style>
+    </head>
+<body>
+    <script src="js/jquery.min.js"></script>
+<input type="range" id="slider" min="0" max="15" step="1" value="0">
+	<output id="output"></output>
+		<script type="text/javascript">
+			var values = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"];
+		$('#slider').on('change input', function() {
+			var value = values[this.value];
+		$("#output").text(value);
+		}).change();
+    </script>
+</body>
+</html>

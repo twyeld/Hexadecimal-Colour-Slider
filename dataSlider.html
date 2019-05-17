@@ -9,26 +9,51 @@
     <script src="js/jquery.min.js"></script>
 <input type="range" style= "width: 400px;" id="slider" min="0" max="255" step="1" value="0">
 	<output id="output"></output>
+<input type="range" style= "width: 400px;" id="slider2" min="0" max="1023" step="1" value="0">
+	<output id="output2"></output>
 		<script type="text/javascript">
 
-		const hexString = '0123456789ABCDEF';
+		const hexStringForward = '0123456789ABCDEF';
+		const hexStringBackward = 'FEDCBA9876543210';
+		const hexNull = '0';
 
-		var hexArrayShort = Array.from(hexString.repeat(16));
+		var hexArrayShortForward = Array.from(hexStringForward.repeat(16));
+		var hexArrayShortBackward = Array.from(hexStringBackward.repeat(16));
+		var hexArrayNull = Array.from(hexNull.repeat(256));
 		
-		let hexArrayLong = [];
+		let hexArrayLongForward = [];
 		
-		Array.from(hexString).forEach(letter =>
-		(hexArrayLong = hexArrayLong.concat(Array.from(letter.repeat(16)))));
+		Array.from(hexStringForward).forEach(letter =>
+		(hexArrayLongForward = hexArrayLongForward.concat(Array.from(letter.repeat(16)))));
 		
-		$('#slider').on('change input', function getHexColours2() {
-			var hexStringLong = hexArrayLong[this.value];
-			var hexStringShort = hexArrayShort[this.value];
-		$("#output").text("#" + hexStringLong + hexStringShort + "9999");
-		document.body.style.background = "#" + hexStringLong + hexStringShort + "9999";
+		let hexArrayLongBackward = [];
+		
+		Array.from(hexStringBackward).forEach(letter =>
+		(hexArrayLongBackward = hexArrayLongBackward.concat(Array.from(letter.repeat(16)))));
+		
+		let hexArrayConcatLong = hexArrayLongForward.concat(hexArrayLongBackward, hexArrayNull, hexArrayLongForward);
+		let hexArrayConcatShort = hexArrayShortForward.concat(hexArrayShortBackward, hexArrayNull, hexArrayShortForward);
+		
+		$('#slider').on('change input', function getHexColours() {
+			var hexStringLongForward = hexArrayLongForward[this.value];
+			var hexStringShortForward = hexArrayShortForward[this.value];
+		$("#output").text("#" + hexStringLongForward + hexStringShortForward + "9999");
+		document.body.style.background = "#" + hexStringLongForward + hexStringShortForward + "9999";
 		}).change();
 		
-		document.writeln(hexArrayLong)
-		document.writeln(hexArrayShort)
+		$('#slider2').on('change input', function getHexColours2() {
+			var hexStringLongForward = hexArrayConcatLong[this.value];
+			var hexStringShortForward = hexArrayConcatShort[this.value];
+		$("#output2").text("#" + hexStringLongForward + hexStringShortForward + "9999");
+		document.body.style.background = "#" + hexStringLongForward + hexStringShortForward + "9999";
+		}).change();
+		
+		document.writeln(hexArrayLongForward)
+		document.writeln(hexArrayShortForward)
+		document.writeln(hexArrayLongBackward)
+		document.writeln(hexArrayShortBackward)
+		document.writeln(hexArrayConcatLong)
+		document.writeln(hexArrayConcatShort)
 
     </script>
 	
